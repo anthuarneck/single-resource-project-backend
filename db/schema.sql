@@ -12,15 +12,15 @@ CREATE TABLE games (
     release_year NUMBER NOT NULL,
     available BOOLEAN,
     genre TEXT NOT NULL,
-    score (rating >= 0 AND rating <= 5),
+    score INTEGER CHECK (score >= 0 AND score <= 5),
 );
 
 CREATE TABLE user (
     id SERIAL PRIMARY KEY,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    password TEXT NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
 );
 
 CREATE TABLE favorited_games (
