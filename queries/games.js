@@ -11,7 +11,7 @@ const getAllGames = async () => {
 
 const getOneGame = async (id) => {
   try {
-    const oneGame = await db.one("SELECT * FROM id=$1", id);
+    const oneGame = await db.one("SELECT * FROM games WHERE id=$1", id);
     return oneGame;
   } catch (error) {
     console.error(error);
@@ -21,10 +21,10 @@ const getOneGame = async (id) => {
 const createGame = async (game) => {
   try {
     const createdGame = await db.one(
-      "INSERT INTO games (title, price, esrb_rating, release_year, available, genre, score) VALUE ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      "INSERT INTO games (title, price, esrb_rating, release_year, available, genre, score) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
       [
         game.title,
-        game.title,
+        game.price,
         game.esrb_rating,
         game.release_year,
         game.available,
@@ -32,7 +32,6 @@ const createGame = async (game) => {
         game.score,
       ]
     );
-
     return createdGame;
   } catch (error) {
     console.error(error);
@@ -45,7 +44,7 @@ const updateGame = async (id, game) => {
       game;
     const updatedGame = await db.one(
       "UPDATE games SET title=$1, price=$2, esrb_rating=$3, release_year=$4, available=$5, genre=$6, score=$7 WHERE id=$8 RETURNING *",
-      [title, price, esrb_rating, release_year, available, genre, score]
+      [title, price, esrb_rating, release_year, available, genre, score, id]
     );
     return updatedGame;
   } catch (error) {
@@ -56,7 +55,7 @@ const updateGame = async (id, game) => {
 const deleteGame = async (id) => {
   try {
     const deletedGame = await db.one(
-      "DELETE FROM games WHERE id=$1 RETURING *",
+      "DELETE FROM games WHERE id=$1 RETURNING *",
       id
     );
     return deletedGame;
