@@ -21,7 +21,20 @@ const createUser = async (user) => {
   }
 };
 
+const getAllFavoriteGamesForUser = async (id) => {
+  try {
+    const favoriteGamesByUser = await db.any(
+      `SELECT * FROM favorited_games JOIN users ON users.id = favorited_games.user_id JOIN games ON games.id = favorited_games.game_id WHERE favorited_games.user_id = $1;`,
+      id
+    );
+    return favoriteGamesByUser;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getOneUser,
   createUser,
+  getAllFavoriteGamesForUser
 };
