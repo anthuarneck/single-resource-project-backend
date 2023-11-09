@@ -25,4 +25,5 @@ VALUES
 
 INSERT INTO favorited_games (game_id, user_id)
 VALUES 
-(1,1);
+(1,1),
+(5,1);

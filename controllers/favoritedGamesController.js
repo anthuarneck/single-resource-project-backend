@@ -4,3 +4,4 @@ const {
     createFavoriteGame,
     deleteFavoritedGame
 } = require("../queries/favorited_games")
+

@@ -1,5 +1,6 @@
 const db = require("../db/dbConfig");
 
+
 const getOneUser = async (id) => {
   try {
     const oneUser = await db.one("SELECT * FROM users WHERE id=$1", id);
@@ -33,8 +34,39 @@ const getAllFavoriteGamesForUser = async (id) => {
   }
 };
 
+const getOneFavoriteGameForUser = async (userId, favoritedGameId) => {
+  try {
+    const oneFavoriteGame = await db.oneOrNone(
+      `SELECT games.* FROM favorited_games 
+      JOIN games ON games.id = favorited_games.game_id 
+      WHERE favorited_games.user_id = $1 AND favorited_games.game_id = $2 LIMIT 1;`, 
+      [userId, favoritedGameId]
+    );
+    return oneFavoriteGame;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+
+const deleteOneFavoriteGameForUser = async (user_id, game_id) => {
+  try {
+    await db.none(
+      'DELETE FROM favorited_games WHERE user_id = $1 AND game_id = $2',
+      [user_id, game_id]
+    );
+    alert(`Game with ID ${game_id} deleted from favorites for user with ID ${user_id}`);
+   
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getOneUser,
   createUser,
-  getAllFavoriteGamesForUser
+  getAllFavoriteGamesForUser,
+  deleteOneFavoriteGameForUser,
+  getOneFavoriteGameForUser
 };
