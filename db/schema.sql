@@ -4,16 +4,6 @@ CREATE DATABASE games_dev;
 
 \c games_dev;
 
-CREATE TABLE games (
-    id SERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
-    price DECIMAL NOT NULL,
-    esrb_rating TEXT NOT NULL,
-    release_year INTEGER     NOT NULL,
-    available BOOLEAN,
-    genre TEXT NOT NULL,
-    score INTEGER CHECK (score >= 0 AND score <= 5)
-);
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -23,8 +13,21 @@ CREATE TABLE users (
     password_hash VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE games (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    price DECIMAL NOT NULL,
+    esrb_rating TEXT NOT NULL,
+    release_year INTEGER     NOT NULL,
+    available BOOLEAN,
+    genre TEXT NOT NULL,
+    score INTEGER CHECK (score >= 0 AND score <= 5),
+    user_id INTEGER REFERENCES users (id) 
+);
+
 CREATE TABLE favorited_games (
     id SERIAL PRIMARY KEY,
     game_id INTEGER REFERENCES games (id),
     user_id INTEGER REFERENCES users (id)
+    ON DELETE CASCADE
 );
