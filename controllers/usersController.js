@@ -16,8 +16,10 @@ users.use("/:userId/favoritedGames", favoritedGames);
 //   }
 // });
 
-users.post("/register", validateRegisterInput, async (req, res) => {
+users.post("/register", validateRegisterInput, async (req, res,) => {
   try {
+    // Make sure when making register form to include 
+    // a field for passwordConfirmation in order for validator to work
     const createdUser = await createUser(req.body);
     res.json(createdUser);
   } catch (error) {
