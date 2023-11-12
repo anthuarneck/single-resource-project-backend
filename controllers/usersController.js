@@ -1,8 +1,8 @@
 const express = require("express");
-const { getOneUserByEmail, createUser } = require("../queries/users");
+const { getOneUserByEmail, createUser, getOneUser } = require("../queries/users");
 const users = express.Router();
 const favoritedGames = require("../controllers/favoritedGamesController");
-import usersValidation from "../validation/usersValidation"
+const { validateRegisterInput }= require("../validation/usersValidation")
 
 users.use("/:userId/favoritedGames", favoritedGames);
 
@@ -16,7 +16,7 @@ users.use("/:userId/favoritedGames", favoritedGames);
 //   }
 // });
 
-users.post("/register", usersValidation, async (req, res) => {
+users.post("/register", validateRegisterInput, async (req, res) => {
   try {
     const createdUser = await createUser(req.body);
     res.json(createdUser);

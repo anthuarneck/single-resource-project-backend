@@ -2,6 +2,7 @@ const validator = require('validator');
 
 const validateRegisterInput = ({body: userRegistry}, res, next) => {
     const registryErrors = [];
+    console.log(userRegistry)
 
     if (validator.isEmpty(userRegistry.email)){
         registryErrors.push("Email is required.");
@@ -39,3 +40,8 @@ const validateRegisterInput = ({body: userRegistry}, res, next) => {
         res.status(400).json({error: registryErrors})
     }
 };
+
+module.exports = {
+validateRegisterInput
+    
+}

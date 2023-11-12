@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.use("/games", gamesController)
 app.use("/users", userController);
+app.use("/register", userController)
 
 app.get("/", (req, res) => {
   res.send("Welcome to our Game Store");
