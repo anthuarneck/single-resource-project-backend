@@ -1,6 +1,6 @@
 \c games_dev;
 
-INSERT INTO users (first_name, last_name, email, password_hash)
+INSERT INTO users (first_name, last_name, email, password)
 VALUES
 ('first', 'last', 'me@gmail.com', 'password');
 
@@ -24,7 +24,5 @@ VALUES
 ('1', 'Cyberpunck', 59.99, 'Mature', 2020, true, 'RPG', 4);
 
 
-INSERT INTO favorited_games (game_id, user_id)
-VALUES 
-(1,1),
-(5,1);
+-- INSERT INTO favorited_games (game_id, user_id)
+-- VALUES ;

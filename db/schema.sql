@@ -10,7 +10,7 @@ CREATE TABLE users (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE games (
@@ -27,7 +27,7 @@ CREATE TABLE games (
 
 CREATE TABLE favorited_games (
     id SERIAL PRIMARY KEY,
-    game_id INTEGER REFERENCES games (id),
-    user_id INTEGER REFERENCES users (id)
-    ON DELETE CASCADE
+    game_id INTEGER REFERENCES games (id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+    UNIQUE (game_id, user_id)
 );

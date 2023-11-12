@@ -15,15 +15,20 @@ favoritedGames.get("/", async (req, res) => {
 
 favoritedGames.post("/:gameId", async (req, res) => {
   try {
-    const { userId, gameId } = req.params;
-    const createdFavoritedGame = await createFavoritedGame(userId, gameId);
+    const { gameId, userId } = req.params;
+    const createdFavoritedGame = await createFavoritedGame(gameId, userId);
     if (createdFavoritedGame) {
       res
         .status(200)
         .json({ success: true, payload: { data: createdFavoritedGame } });
     }
   } catch (error) {
-    res.send(error);
+    if (error.code === '23505') {
+        alert('This game has already been favorited by this user.')
+    } else {
+        res.send(error);
+    }
+
   }
 });
 

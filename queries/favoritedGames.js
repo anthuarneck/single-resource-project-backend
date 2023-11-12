@@ -36,6 +36,7 @@ const db = require("../db/dbConfig");
 //   }
 // };
 
+
 const getAllFavoritedGamesForUser = async (id) => {
     try {
       const favoriteGamesByUser = await db.any(
