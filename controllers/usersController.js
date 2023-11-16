@@ -44,8 +44,7 @@ users.post("/", async (req, res) => {
     const user = await getOneUserByEmail(email);
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
-      if (true) {
-        console.log("INFORMATION RECIVED")
+      if (isMatch) {
         res.json({ message: "Login successful", user });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
