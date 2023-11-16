@@ -7,11 +7,11 @@ const {
   deleteGame,
 } = require("../queries/games");
 
-const games = express.Router();
+const games = express.Router({ mergeParams: true });
 
-games.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const oneGame = await getOneGame(id);
+games.get("/:index", async (req, res) => {
+  const { index } = req.params;
+  const oneGame = await getOneGame(index);
   if (oneGame) {
     res.json(oneGame);
   } else {
@@ -20,7 +20,11 @@ games.get("/:id", async (req, res) => {
 });
 
 games.get("/", async (req, res) => {
-  const allGames = await getAllGames();
+  console.log("THIS IS THE GET ALL GAMES REQUEST ------->>",req)
+  // console.log("THIS IS THE GET ALL GAMES RESPONSE ------->>",res)
+  const { userId } = req.params
+  const allGames = await getAllGames(userId);
+  console.log(`THE USER ID ---->> ${userId}`)
   if (allGames[0]) {
     res.status(200).json({ succes: true, data: { payload: allGames } });
   } else {

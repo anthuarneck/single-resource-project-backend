@@ -1,8 +1,10 @@
 const db = require("../db/dbConfig.js");
 
 const getAllGames = async () => {
+  // console.log(id)
   try {
     const allGames = await db.any("SELECT * FROM games");
+    console.log(allGames)
     return allGames;
   } catch (error) {
     console.error(error);

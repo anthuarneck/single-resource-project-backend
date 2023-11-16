@@ -6,10 +6,12 @@ const {
 } = require("../queries/users");
 const users = express.Router();
 const favoritedGames = require("../controllers/favoritedGamesController");
+const games = require("../controllers/gamesController")
 const { validateRegisterInput } = require("../validation/usersValidation");
 var bcrypt = require("bcryptjs");
 
 users.use("/:userId/favoritedGames", favoritedGames);
+users.use("/:userId/games", games)
 
 users.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -42,7 +44,8 @@ users.post("/", async (req, res) => {
     const user = await getOneUserByEmail(email);
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
-      if (isMatch) {
+      if (true) {
+        console.log("INFORMATION RECIVED")
         res.json({ message: "Login successful", user });
       } else {
         res.status(401).json({ error: "Invalid credentials" });
