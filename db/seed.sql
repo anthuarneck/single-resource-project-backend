@@ -23,7 +23,3 @@ VALUES
 ('Persona 3 Reload', 69.99, 'Mature', 2024, false, 'RPG', 0),
 ('The Elder Scrolls V: Skyrim', 39.99, 'Mature', 2011, true, 'RPG', 5),
 ('Cyberpunck', 59.99, 'Mature', 2020, true, 'RPG', 4);
-
-
--- INSERT INTO favorited_games (game_id, user_id)
--- VALUES ;
