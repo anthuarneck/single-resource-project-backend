@@ -20,14 +20,16 @@ games.get("/:index", async (req, res) => {
 });
 
 games.get("/", async (req, res) => {
-  console.log("THIS IS THE GET ALL GAMES REQUEST ------->>",req)
-  // console.log("THIS IS THE GET ALL GAMES RESPONSE ------->>",res)
-  const { userId } = req.params
-  const allGames = await getAllGames(userId);
-  console.log(`THE USER ID ---->> ${userId}`)
-  if (allGames[0]) {
-    res.status(200).json({ succes: true, data: { payload: allGames } });
-  } else {
+  try {
+    console.log("THIS IS THE GET ALL GAMES REQUEST ------->>", req);
+    // console.log("THIS IS THE GET ALL GAMES RESPONSE ------->>",res)
+    const { userId } = req.params;
+    const allGames = await getAllGames(userId);
+    console.log(`THE USER ID ---->> ${userId}`);
+    if (allGames[0]) {
+      res.status(200).json({ succes: true, data: { payload: allGames } });
+    }
+  } catch {
     res.status(500).json({ success: false, data: { error: "Server Error!" } });
   }
 });
@@ -56,13 +58,13 @@ games.delete("/:id", async (req, res) => {
 });
 
 games.put("/:id", async (req, res) => {
-    const { id } = req.params;
-    const updatedGame = await updateGame(id, req.body);
-    if (updatedGame.id) {
-        res.status(200).json(updatedGame)
-    } else {
-        res.status(404).json("No Game Found With That ID")
-    }
-})
+  const { id } = req.params;
+  const updatedGame = await updateGame(id, req.body);
+  if (updatedGame.id) {
+    res.status(200).json(updatedGame);
+  } else {
+    res.status(404).json("No Game Found With That ID");
+  }
+});
 
 module.exports = games;
