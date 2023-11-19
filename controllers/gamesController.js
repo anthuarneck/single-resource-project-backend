@@ -24,10 +24,9 @@ games.get("/", async (req, res) => {
     console.log("THIS IS THE GET ALL GAMES REQUEST ------->>", req);
     // console.log("THIS IS THE GET ALL GAMES RESPONSE ------->>",res)
     const { userId } = req.params;
-    const allGames = await getAllGames(userId);
-    console.log(`THE USER ID ---->> ${userId}`);
+    const allGames = await getAllGames();
    
-      res.status(200).json({ succes: true, data: { payload: allGames } });
+      res.status(200).json({ success: true, data: { payload: allGames } });
     
   } catch {
     res.status(500).json({ success: false, data: { error: "Server Error!" } });
