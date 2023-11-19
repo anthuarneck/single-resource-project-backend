@@ -21,8 +21,6 @@ games.get("/:index", async (req, res) => {
 
 games.get("/", async (req, res) => {
   try {
-    console.log("THIS IS THE GET ALL GAMES REQUEST ------->>", req);
-    // console.log("THIS IS THE GET ALL GAMES RESPONSE ------->>",res)
     const { userId } = req.params;
     const allGames = await getAllGames();
    
