@@ -26,9 +26,9 @@ games.get("/", async (req, res) => {
     const { userId } = req.params;
     const allGames = await getAllGames(userId);
     console.log(`THE USER ID ---->> ${userId}`);
-    if (allGames[0]) {
+   
       res.status(200).json({ succes: true, data: { payload: allGames } });
-    }
+    
   } catch {
     res.status(500).json({ success: false, data: { error: "Server Error!" } });
   }
