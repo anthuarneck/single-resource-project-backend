@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to our Game Store");
 });
 
-app.get("*", (req, res) => {
-  res.status(404).json({ success: false, data: { error: "Page not found! " } });
-});
+// app.get("*", (req, res) => {
+//   res.status(404).json({ success: false, data: { error: "Page not found! " } });
+// });
 
 module.exports = app;
