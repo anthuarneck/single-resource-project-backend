@@ -9,8 +9,9 @@ const cn = {
     database: process.env.PG_DATABASE,
     user: process.env.PG_USER,
     PG_PASSWORD: process.env.PG_PASSWORD,
-    DATABASE_URL: process.env.DATABASE_URL
-
+    DATABASE_URL: process.env.DATABASE_URL,
+    PSQL_Command: process.env.PSQL_Command,
+    External_Database_URL: process.env.External_Database_URL
 };
 
 const db = pgp(cn);
